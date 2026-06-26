@@ -64,22 +64,37 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 🧪 Test Results
 
-## 🧪 Test Results
-
 ```
-# Paste your pytest output here, e.g.:
 (.venv) PS C:\Users\vinny\Vincent-ai110-module1show-gameglitchinvestigator-starter> python -m pytest
-
-=================================== test session starts ===================================
-
+==================================== test session starts ====================================
 platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
-
 rootdir: C:\Users\vinny\Vincent-ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.14.0
+collected 9 items
 
-collected 4 items
-tests\test_game_logic.py ....                                                    [100%]
-4 passed in 0.02s
+tests\test_game_logic.py .........                                                     [100%]
 
+9 passed in 0.04s
+```
 ## 🚀 Stretch Features
 
-- [ ] No stretch features completed in this submission.
+### ✅ Advanced Edge-Case Testing 
+Added 5 edge case pytest tests targeting:
+- Empty string input → returns "Enter a guess." error
+- Non-numeric input (e.g. "abc") → returns "That is not a number." error
+- Negative numbers (e.g. "-5") → parses correctly as -5
+- Decimal input (e.g. "42.7") → converts correctly to 42
+- None input → returns "Enter a guess." error
+
+All 9 tests pass successfully as shown in the Test Results section above.
+
+### ✅ Professional Documentation and Style 
+Added professional PEP 257 docstrings to all 4 functions in 
+`logic_utils.py`:
+- `get_range_for_difficulty` — documents difficulty parameter and 
+  return tuple
+- `parse_guess` — documents three-part return tuple with examples
+- `check_guess` — documents guess/secret parameters and outcomes
+- `update_score` — documents scoring rules and attempt-based logic
+
+All prompts and changes are documented in `ai_interactions.md`.
