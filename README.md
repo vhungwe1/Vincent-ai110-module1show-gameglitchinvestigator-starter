@@ -3,7 +3,7 @@
 ## 🚨 The Situation
 
 You asked an AI to build a simple "Number Guessing Game" using Streamlit.
-It wrote the code, ran away, and now the game is unplayable. 
+It wrote the code, ran away, and now the game is unplayable.
 
 - You can't win.
 - The hints lie to you.
@@ -12,43 +12,74 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 🛠️ Setup
 
 1. Install dependencies: `pip install -r requirements.txt`
-2. Run the broken app: `python -m streamlit run app.py`
+2. Activate virtual environment: `.venv\Scripts\activate`
+3. Run the app: `python -m streamlit run app.py`
 
 ## 🕵️‍♂️ Your Mission
 
-1. **Play the game.** Open the "Developer Debug Info" tab in the app to see the secret number. Try to win.
-2. **Find the State Bug.** Why does the secret number change every time you click "Submit"? Ask ChatGPT: *"How do I keep a variable from resetting in Streamlit when I click a button?"*
-3. **Fix the Logic.** The hints ("Higher/Lower") are wrong. Fix them.
-4. **Refactor & Test.** - Move the logic into `logic_utils.py`.
-   - Run `pytest` in your terminal.
-   - Keep fixing until all tests pass!
+1. **Play the game.** Open the "Developer Debug Info" tab to see 
+   the secret number. Try to win.
+2. **Find the State Bug.** The secret number was switching between 
+   a number and text on every even attempt, causing random behavior.
+3. **Fix the Logic.** The hints ("Higher/Lower") were completely 
+   backwards. Fixed by swapping the messages in check_guess.
+4. **Refactor and Test.** Moved all logic into `logic_utils.py` 
+   and ran pytest until all tests passed.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] The game is a number guessing game where the player tries to 
+      guess a secret number within a limited number of attempts. 
+      The game gives hints after each guess and tracks your score.
+
+- [x] Bugs found:
+      1. Hints were backwards — "Go Higher" showed when guess was 
+         too high and "Go Lower" showed when guess was too low.
+      2. Hard difficulty range was 1-50, easier than Normal (1-100).
+      3. Secret number switched between integer and string on even 
+         attempts, causing random hint failures.
+      4. Wrong guesses on even attempts added 5 points instead of 
+         subtracting them.
+
+- [x] Fixes applied:
+      1. Swapped "Go HIGHER" and "Go LOWER" messages in check_guess.
+      2. Changed Hard difficulty range from 1-50 to 1-200.
+      3. Removed the if/else that converted secret to string on 
+         even attempts.
+      4. Removed the scoring logic that added points for wrong guesses.
+      5. Fixed new_game button to use difficulty range instead of 
+         hardcoded 1-100.
+      6. Refactored all 4 functions into logic_utils.py.
 
 ## 📸 Demo Walkthrough
 
-Describe your fixed game in numbered steps so a reader can follow along without watching a video:
+1. User opens the game and selects Normal difficulty (range 1-100)
+2. User types a guess of 40 and clicks Submit Guess
+3. Game returns "Go Higher!" meaning the secret is above 40
+4. User types 70 and clicks Submit Guess
+5. Game returns "Go Lower!" meaning the secret is below 70
+6. User types 55 and clicks Submit Guess
+7. Game returns "Correct!" with balloons and shows final score
+8. Score decreases by 5 points for each wrong guess made
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+## 🧪 Test Results
 
 ## 🧪 Test Results
 
 ```
 # Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
-```
+(.venv) PS C:\Users\vinny\Vincent-ai110-module1show-gameglitchinvestigator-starter> python -m pytest
+
+=================================== test session starts ===================================
+
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+
+rootdir: C:\Users\vinny\Vincent-ai110-module1show-gameglitchinvestigator-starter
+
+collected 4 items
+tests\test_game_logic.py ....                                                    [100%]
+4 passed in 0.02s
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
+- [ ] No stretch features completed in this submission.
